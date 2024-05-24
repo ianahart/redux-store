@@ -16,7 +16,7 @@ const resolvers = {
 
       if (name) {
         params.name = {
-          $regex: name
+          $regex: name,
         };
       }
 
@@ -29,7 +29,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.products',
-          populate: 'category'
+          populate: 'category',
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
@@ -43,7 +43,7 @@ const resolvers = {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
           path: 'orders.products',
-          populate: 'category'
+          populate: 'category',
         });
 
         return user.orders.id(_id);
@@ -62,7 +62,7 @@ const resolvers = {
         const product = await stripe.products.create({
           name: products[i].name,
           description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          images: [`${url}/images/${products[i].image}`],
         });
 
         const price = await stripe.prices.create({
@@ -73,7 +73,7 @@ const resolvers = {
 
         line_items.push({
           price: price.id,
-          quantity: 1
+          quantity: 1,
         });
       }
 
@@ -82,11 +82,11 @@ const resolvers = {
         line_items,
         mode: 'payment',
         success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${url}/`
+        cancel_url: `${url}/`,
       });
 
       return { session: session.id };
-    }
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -134,8 +134,8 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
-  }
+    },
+  },
 };
 
 module.exports = resolvers;
