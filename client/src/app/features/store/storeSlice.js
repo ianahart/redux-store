@@ -32,6 +32,11 @@ const storeSlice = createSlice({
         return product;
       });
     },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter((product) => product._id !== action.payload._id);
+      state.cartOpen = state.cart.length > 0;
+
+    },
   },
 });
 
