@@ -56,6 +56,9 @@ You can run this application locally by following the steps below. You can also 
 - Shop for products you want to buy then checkout with Stripe
 
 ## Visuals
+<img width="650" alt="shop-shop" src="https://github.com/ianahart/redux-store/assets/29121238/dc36a053-8516-4c9f-8cf6-bd753800461b">
+
+
 
 ## Tests
 
@@ -67,7 +70,7 @@ N/A
 
 ## References
 
-[Apollo GraphQL](https://www.apollographql.com/docs/)
+[Redux](https://redux-toolkit.js.org/)
 
 ## License
 
