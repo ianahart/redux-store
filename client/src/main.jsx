@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import ReactDOM from 'react-dom/client';
+import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
@@ -10,6 +10,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
 
 const router = createBrowserRouter([
   {
@@ -18,28 +20,35 @@ const router = createBrowserRouter([
     error: <NoMatch />,
     children: [
       {
-        index: true, 
-        element: <Home />
-      }, {
+        index: true,
+        element: <Home />,
+      },
+      {
         path: '/login',
-        element: <Login />
-      }, {
+        element: <Login />,
+      },
+      {
         path: '/signup',
-        element: <Signup />
-      }, {
+        element: <Signup />,
+      },
+      {
         path: '/success',
-        element: <Success />
-      }, {
+        element: <Success />,
+      },
+      {
         path: '/orderHistory',
-        element: <OrderHistory />
-      }, {
+        element: <OrderHistory />,
+      },
+      {
         path: '/products/:id',
-        element: <Detail />
-      }
-    ]
-  }
+        element: <Detail />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
-)
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
