@@ -35,7 +35,15 @@ const storeSlice = createSlice({
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((product) => product._id !== action.payload._id);
       state.cartOpen = state.cart.length > 0;
+    },
 
+    clearCart: (state) => {
+      state.cart = [];
+      state.cartOpen = false;
+    },
+
+    toggleCart: (state) => {
+      state.cartOpen = !state.cartOpen;
     },
   },
 });
