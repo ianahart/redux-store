@@ -9,7 +9,8 @@ import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './style.css';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+console.log(import.meta.env.VITE_STRIPE_API_KEY);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
 
 const Cart = () => {
   const [state, dispatch] = useStoreContext();
@@ -85,11 +86,7 @@ const Cart = () => {
           <div className="flex-row space-between">
             <strong>Total: ${calculateTotal()}</strong>
 
-            {Auth.loggedIn() ? (
-              <button onClick={submitCheckout}>Checkout</button>
-            ) : (
-              <span>(log in to check out)</span>
-            )}
+            {Auth.loggedIn() ? <button onClick={submitCheckout}>Checkout</button> : <span>(log in to check out)</span>}
           </div>
         </div>
       ) : (
