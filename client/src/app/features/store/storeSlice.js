@@ -46,7 +46,7 @@ const storeSlice = createSlice({
       state.cartOpen = !state.cartOpen;
     },
     updateCategories: (state, action) => {
-      state.categories = action.payload;
+      state.categories = action.payload.categories;
     },
     updateCurrentCategory: (state, action) => {
       state.currentCategory = action.payload.currentCategory;

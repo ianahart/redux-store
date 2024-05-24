@@ -7,7 +7,7 @@ import { addToCart as ADD_TO_CART, updateCartQuantity as UPDATE_CART_QUANTITY } 
 
 function ProductItem(item) {
   const dispatch = useDispatch();
-  const { cart } = useSelector((store) => store.cart);
+  const { cart } = useSelector((store) => store.store);
 
   const { image, name, _id, price, quantity } = item;
 

@@ -10,7 +10,7 @@ import { updateProducts as UPDATE_PRODUCTS } from '../../app/store';
 function ProductList() {
   const dispatch = useDispatch();
 
-  const { currentCategory, products } = useSelector((store) => store);
+  const { currentCategory, products } = useSelector((store) => store.store);
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 

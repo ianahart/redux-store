@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function CategoryMenu() {
   const dispatch = useDispatch();
-  const { categories } = useSelector((store) => store);
+  const store = useSelector((store) => store.store);
 
   const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
 
@@ -46,7 +46,7 @@ function CategoryMenu() {
   return (
     <div>
       <h2>Choose a Category:</h2>
-      {categories.map((item) => (
+      {store.categories.map((item) => (
         <button
           key={item._id}
           onClick={() => {

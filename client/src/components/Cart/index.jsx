@@ -7,12 +7,13 @@ import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
 import { toggleCart as TOGGLE_CART, addMultipleToCart as ADD_MULTIPLE_TO_CART } from '../../app/store';
 import './style.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
 
 const Cart = () => {
-  const { cartOpen, cart } = useSelector((store) => store);
+  const dispatch = useDispatch();
+  const store = useSelector((store) => store.store);
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
@@ -29,10 +30,10 @@ const Cart = () => {
       dispatch(ADD_MULTIPLE_TO_CART({ products: [...cart] }));
     }
 
-    if (!cart.length) {
+    if (!store.cart.length) {
       getCart();
     }
-  }, [cart.length, dispatch]);
+  }, [store.cart.length, dispatch]);
 
   function toggleCart() {
     dispatch(TOGGLE_CART());
@@ -40,7 +41,7 @@ const Cart = () => {
 
   function calculateTotal() {
     let sum = 0;
-    cart.forEach((item) => {
+    store.cart.forEach((item) => {
       sum += item.price * item.purchaseQuantity;
     });
     return sum.toFixed(2);
@@ -49,7 +50,7 @@ const Cart = () => {
   function submitCheckout() {
     const productIds = [];
 
-    cart.forEach((item) => {
+    store.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
         productIds.push(item._id);
       }
@@ -60,7 +61,7 @@ const Cart = () => {
     });
   }
 
-  if (!cartOpen) {
+  if (!store.cartOpen) {
     return (
       <div className="cart-closed" onClick={toggleCart}>
         <span role="img" aria-label="trash">
@@ -76,9 +77,9 @@ const Cart = () => {
         [close]
       </div>
       <h2>Shopping Cart</h2>
-      {cart.length ? (
+      {store.cart.length ? (
         <div>
-          {cart.map((item) => (
+          {store.cart.map((item) => (
             <CartItem key={item._id} item={item} />
           ))}
 
