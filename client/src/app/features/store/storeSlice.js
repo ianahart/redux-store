@@ -45,9 +45,25 @@ const storeSlice = createSlice({
     toggleCart: (state) => {
       state.cartOpen = !state.cartOpen;
     },
+    updateCategories: (state, action) => {
+      state.categories = action.payload;
+    },
+    updateCurrentCategory: (state, action) => {
+      state.currentCategory = action.payload.currentCategory;
+    },
   },
 });
 
-export const { updateProducts } = storeSlice.actions;
+export const {
+  updateProducts,
+  addToCart,
+  addMultipleToCart,
+  updateCartQuantity,
+  toggleCart,
+  clearCart,
+  removeFromCart,
+  updateCategories,
+  updateCurrentCategory,
+} = storeSlice.actions;
 
 export const storeReducer = storeSlice.reducer;
