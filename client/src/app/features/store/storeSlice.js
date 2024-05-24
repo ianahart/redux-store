@@ -19,11 +19,19 @@ const storeSlice = createSlice({
       state.cartOpen = true;
       state.cart.push(action.payload.product);
     },
-    
-        addMultipleToCart: (state, action) => {
-            state.cart.push(...action.payload.products);
-        }
 
+    addMultipleToCart: (state, action) => {
+      state.cart.push(...action.payload.products);
+    },
+    updateCartQuantity: (state, action) => {
+      state.cartOpen = true;
+      state.cart = state.cart.map((product) => {
+        if (product._id === action.payload._id) {
+          product.purchaseQuantity = action.payload.purchaseQuantity;
+        }
+        return product;
+      });
+    },
   },
 });
 
