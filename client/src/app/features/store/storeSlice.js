@@ -15,11 +15,15 @@ const storeSlice = createSlice({
     updateProducts: (state, action) => {
       state.products = action.payload.products;
     },
-        addToCart: (state, action) => {
-            state.cartOpen = true;
-            state.cart.push(action.payload.product)
-
+    addToCart: (state, action) => {
+      state.cartOpen = true;
+      state.cart.push(action.payload.product);
+    },
+    
+        addMultipleToCart: (state, action) => {
+            state.cart.push(...action.payload.products);
         }
+
   },
 });
 
